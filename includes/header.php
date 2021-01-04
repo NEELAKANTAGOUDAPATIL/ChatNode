@@ -71,6 +71,17 @@
     });
   </script>
 
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script>
+  		$(document).ready(function(){
+  		 $("#div_refresh").load("includes/post.php");
+  				setInterval(function() {
+  						$("#div_refresh").load("includes/post.php");
+  				}, 1000);
+  		});
+
+  </script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
