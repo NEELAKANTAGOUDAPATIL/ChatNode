@@ -1,5 +1,6 @@
 <?php
   include('time_stamp.php');
+  include('../session.php');
 	include("database.php");
 			$query=mysqli_query($conn, "SELECT * from post LEFT JOIN user on user.user_id = post.user_id order by post_id DESC");
 			while($row=mysqli_fetch_array($query)){

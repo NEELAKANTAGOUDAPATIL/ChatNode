@@ -13,7 +13,7 @@ $weeks = round($time_difference / 604800 );
 $months = round($time_difference / 2419200 );
 $years = round($time_difference / 29030400 );
 
-if($seconds <= 60)
+if($seconds < 60)
 {
 echo"$seconds seconds ago";
 }
