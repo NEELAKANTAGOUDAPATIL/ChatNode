@@ -1,9 +1,7 @@
 <?php
-	session_start();
 
 	// connect to database
 	include('database.php');
-	#$db = mysqli_connect('localhost', 'root', '', 'biobook');
 	$db = $conn;
 	// variable declaration
 	$username = "";
@@ -41,9 +39,34 @@
 		$password_2  =  e($_POST['password_2']);
 		$firstname   =  e($_POST['fname']);
 		$lastname    =  e($_POST['lname']);
-		$birthday    =  e($_POST['birthday']);
+		$birthday    =  e($_POST['day'])."/".e($_POST['month'])."/".e($_POST['year']);
 		$gender      =  e($_POST['gender']);
 		$number      =  e($_POST['number']);
+
+		if (!isset($_FILES['profile']['tmp_name'])) {
+			$location = "uploads/profile/user.jpg";
+		}else{
+			$file=$_FILES['profile']['tmp_name'];
+			$image = $_FILES["profile"] ["name"];
+			$image_name= addslashes($_FILES['profile']['name']);
+			$size = $_FILES["profile"] ["size"];
+			$error = $_FILES["profile"] ["error"];
+
+			if ($error > 0){
+				echo '<script>alert("Whoops,\nError occured while uploading the file.\nPlease try again.");window.location.href="register.php";</script>';
+			}else{
+				if($size > 10000000) //conditions for the file
+				{
+					echo '<script>alert("Whoops,\nFile size is too big.");window.location.href="register.php";</script>';
+				}
+
+				else
+				{
+					move_uploaded_file($_FILES["profile"]["tmp_name"],"uploads/profile" . $_FILES["profile"]["name"]);
+					$location="uploads/profile/" . $_FILES["profile"]["name"];
+				}
+			}
+		}
 
 		// form validation: ensure that the form is correctly filled
 		if (empty($username))
@@ -96,8 +119,8 @@
 		{
 			$password = md5($password_1);//encrypt the password before saving in the database
 
-			$query = "INSERT INTO user (username, email, password, firstname, lastname, birthday, gender, number)
-					  VALUES('$username', '$email', '$password', '$firstname', '$lastname', '$birthday', '$gender', '$number')";
+			$query = "INSERT INTO user (username, email, password, firstname, lastname, birthday, gender, number, profile_picture)
+					  VALUES('$username', '$email', '$password', '$firstname', '$lastname', '$birthday', '$gender', '$number', '$location')";
 			mysqli_query($db, $query);
 			$_SESSION['success']  = "New user successfully created!!";
 
@@ -106,6 +129,23 @@
 			$_SESSION['id'] = $logged_in_user_id;
 			$_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
 			$_SESSION['success']  = "You are now logged in";
+			#####extra
+              $connect = mysqli_connect('localhost', 'root', '','pchat');
+	           if (!$connect) {
+	 	       echo "Connection error: " . msqli_connect_error();
+                           	}
+              $query1 = "INSERT INTO login (username)
+						  VALUES('$username')";
+			mysqli_query($connect, $query1);
+			$sub_query = "
+			INSERT INTO login_details
+				(user_id)
+				VALUES ('".$logged_in_user['user_id']."')
+			";
+			$statement = $connect->prepare($sub_query);
+			$statement->execute();
+			$_SESSION['login_details_id'] = $connect->insert_id;
+			####extra
 			session_start();
 			header('location: home.php');
 
@@ -162,6 +202,18 @@
 				$_SESSION['success']  = "You are now logged in";
 				session_start();
 				$_SESSION['id'] = $logged_in_user['user_id'];
+				$connect = mysqli_connect('localhost', 'root', '','pchat');
+			  if (!$connect) {
+		 	  	echo "Connection error: " . msqli_connect_error();
+			  }
+				$sub_query = "
+				INSERT INTO login_details
+	     		(user_id)
+	     		VALUES ('".$logged_in_user['user_id']."')
+				";
+				$statement = $connect->prepare($sub_query);
+				$statement->execute();
+				$_SESSION['login_details_id'] = $connect->insert_id;
 				header('location: home.php');
 			}
 			else
@@ -255,7 +307,7 @@
 		$return = getUserByIdRow($myId);
 
 		$user = [
-	       'id'     => (int) $return->id,
+	       'id'     => (int) $return->$mysqli->insert_id,
 		   'name'   => $return->username,
 		   'number' => $return->number,
 		   'pic'    => '../assets/images/'.$return->pic
@@ -355,6 +407,7 @@
 			$arr['status']      = (int) $message['status'];
 			$arr['recvIsGroup'] = false;
 			$arr['time']        = $message['time'];
+
 		}
 		header('Content-Type: application/json');
 		echo json_encode($arr);

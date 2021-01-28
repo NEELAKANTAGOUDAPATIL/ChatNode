@@ -9,7 +9,7 @@ $id = $_SESSION['id'];
 
 $query=mysqli_query($conn,"SELECT * FROM user WHERE user_id ='$id'");
 $row=mysqli_fetch_array($query);
-$cover_picture=$row['cover_picture'];
+$_SESSION['credits']=$row['credits'];
 $profile_picture=$row['profile_picture'];
 $firstname=$row['firstname'];
 $lastname=$row['lastname'];

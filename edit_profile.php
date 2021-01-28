@@ -19,12 +19,11 @@ if(isset($_POST['save']))
 {
 $first_save=$_POST['firstname'];
 $last_save=$_POST['lastname'];
-$username_save=$_POST['username'];
 $birthday_save=$_POST['birthday'];
 $gender_save=$_POST['gender'];
 $number_save=$_POST['number'];
 
-	mysqli_query($conn, "UPDATE user SET firstname ='$first_save', lastname ='$last_save', username ='$username_save',
+	mysqli_query($conn, "UPDATE user SET firstname ='$first_save', lastname ='$last_save',
 	birthday ='$birthday_save' , gender ='$gender_save', number ='$number_save' WHERE user_id = '$id'")
 				or die(mysqli_error());
 	echo "Saved!";
@@ -67,10 +66,6 @@ $number_save=$_POST['number'];
 				<tr>
 					<td><label>Last name</label></td>
 					<td><input type="text" name="lastname" value="<?php echo $lastname; ?>" placeholder="Enter your lastname....." class="form-1" title="Enter your lastname" required /></td>
-				</tr>
-				<tr>
-					<td><label>User name</label></td>
-					<td><input type="text" name="username" maxlength="8" value="<?php echo $username; ?>" placeholder="Enter your username....." class="form-1" title="Enter your username" required /></td>
 				</tr>
 				<tr>
 					<td><label>Birthday</label></td>

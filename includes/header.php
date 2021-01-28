@@ -10,23 +10,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="57x57" href="../assets/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="../assets/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="../assets/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="../assets/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="../assets/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="../assets/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="../assets/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
-  <link rel="manifest" href="../assets/favicon/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="../assets/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
+  <link href="image/chatnode-logo.png" rel="icon">
+  <link href="image/chatnode-logo.png" rel="ChatNode_logo">
 
 
   <!-- Google Fonts -->
@@ -71,17 +56,6 @@
     });
   </script>
 
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
-  <script>
-  		$(document).ready(function(){
-  		 $("#div_refresh").load("includes/post.php");
-  				setInterval(function() {
-  						$("#div_refresh").load("includes/post.php");
-  				}, 1000);
-  		});
-
-  </script>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
@@ -99,7 +73,7 @@
       <!-- <h1 class="logo mr-auto"><a href="index.html"><img src="assets/img/logo.png" style="width:200px; height:200px"/></a></h1> -->
       <!-- Uncomment below if you prefer to use an image logo -->
       <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
-      <a href="home.php" class="logo mr-auto"><h2 style="float:left; font-family:Oswald; margin: 10px">ChatNode</h2></a>
+      <a href="home.php" class="logo mr-auto"><h2 style="float:left; font-family:Oswald; margin: 10px; color:#fff;">ChatNode</h2></a>
 
       <!-- <div class="mobileHide">
        <h2 style="float:right; font-family:Oswald; margin: 10px">ChatNode</h2></div> -->
@@ -117,7 +91,11 @@
   				<!-- <li><a href="timeline.php" title="<?php //echo $username ?>"><label><?php //echo $username ?></label></a></li> -->
   				<li></li>
   				<li></li>
-  				<li><a href="home.php" title="Home"><label>Home</label></a></li>
+  				<li><a href="home.php" title="Home"><label>New Posts</label></a></li>
+          <li></li>
+          <li><a href="chat.php" title="Chat"><label>Chat</label></a></li>
+          <li></li>
+          <li><a href="paid_posts.php" title="Paid Posts"><label>Paid Posts</label></a></li>
           <li></li>
   				<li><a href="profile.php" title="Profile"><label class="active">Profile</label></a></li>
           <li></li>

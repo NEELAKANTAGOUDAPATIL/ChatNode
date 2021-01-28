@@ -13,20 +13,13 @@ $weeks = round($time_difference / 604800 );
 $months = round($time_difference / 2419200 );
 $years = round($time_difference / 29030400 );
 
-if($seconds < 60)
+if($seconds <= 60)
 {
-echo"$seconds seconds ago";
+echo"few seconds ago";
 }
 else if($minutes <=60)
 {
-   if($minutes==1)
-   {
-     echo"one minute ago";
-    }
-   else
-   {
-   echo"$minutes minutes ago";
-   }
+   echo"few minutes ago";
 }
 else if($hours <=24)
 {
